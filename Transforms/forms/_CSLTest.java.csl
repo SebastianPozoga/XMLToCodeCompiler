@@ -1,0 +1,60 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package eu.pozoga.jspf.form;
+
+import eu.pozoga.jspf.core.Form;
+import eu.pozoga.jspf.core.Form.Massage;
+import eu.pozoga.jspf.core.ServiceUnit;
+import eu.pozoga.jspf.model.User;
+import eu.pozoga.jspf.model.UsergroupManager;
+import eu.pozoga.jspf.services.DBConnectorService;
+import eu.pozoga.jspf.validators.EmailValidator;
+import eu.pozoga.jspf.validators.LengthValidator;
+import eu.pozoga.jspf.validators.RequiredValidator;
+import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.hibernate.Session;
+
+
+
+/**
+ *
+ * @author sebastian
+ */
+<$modelName=uf:@name>
+public class <$modelName>Form extends Form  {
+
+    public <$modelName>Form(<$modelName> entity) {
+        super(entity);
+    }
+
+
+    @Override
+    public boolean validate() {
+        boolean isValid = true;
+        <$modelName> entity = getEntity();
+        <{List <Massage> massage;}>
+
+        //Properties
+        <<foreach:properties/property>
+        //<@name>
+        <$nameUF=uf:@name>
+        <$nameLF=lf:@name>
+        massage = getMassages("<$nameUF>");
+        <$nameUF SPACE nameLF> = entity.get<$nameUF>();
+           <<foreach:validators/lenght>
+                isValid = isValid & LengthValidator.validate(massage, <@min>, <@max>, <$nameLF>());
+            <-foreach>
+            <<if:@not-null='true'>
+                isValid = isValid & RequiredValidator.validate(massage, entity.get<$nameUF>());
+            <-if>
+        <-foreach>
+
+        setValid(isValid);
+        return isValid;
+    }
+
+}

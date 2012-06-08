@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codemetadata name="Content">
+  <properties>
+    <property type="String" name="title" not-null="true" unique="true">
+      <validators>
+	<lenght min="5" max="500"/>
+      </validators>
+    </property>
+    <property type="String" name="description">
+      <validators>
+	<lenght min="5" max="250"/>
+      </validators>
+    </property>
+    <property type="String" name="keywords">
+      <validators>
+	<lenght min="5" max="250"/>
+      </validators>
+    </property>
+    <property name="body" not-null="true" type="text">
+      <validators>
+	<lenght min="1" max="50000"/>
+      </validators>
+    </property>
+  </properties>
+  <relations>
+    <many-to-one name="universalgroup"/>
+  </relations>
+  <queries>
+    <!--<update-query>FROM User u WHERE u.name=:name AND u.codePassword=:password AND u.active=1</update-query>
+    <save-query>FROM User u WHERE u.name=:name AND u.codePassword=:password AND u.active=1</save-query>
+    <delete-query name="login">FROM User u WHERE u.name=:name AND u.codePassword=:password AND u.active=1</delete-query>
+    <report-query name="login">FROM User u WHERE u.name=:name AND u.codePassword=:password AND u.active=1</report-query>-->
+  </queries>
+</codemetadata>
